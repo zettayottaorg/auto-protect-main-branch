@@ -43,10 +43,17 @@ def verifye_signature(payload, rawSignature, secret):
 # protect main branch
 def protect_branch(owner, repo, branch):
     url                 = "{}/repos/{}/{}/branches/{}/protection".format(api_url, owner, repo, branch)  
-    with open('configs/branch_config.json') as json_file:
-        data = json.load(json_file)    
-        response            = requests.put(url, data=json.dumps(data), headers=headers)
-        return True if response.status_code == 200 else False
+    file_path = 'configs/branch_config.json'
+    if os.path.exists(file_path):
+        with open(file_path) as json_file:
+            try:
+                data = json.load(json_file)    
+                response            = requests.put(url, data=json.dumps(data), headers=headers)
+            except:
+                print("error while trying to open file {}".format(file_path))
+                print(sys.exc_info()[0])
+                raise
+            return True if response.status_code == 200 else False
 
 # create an issue and mention user
 def create_issue(owner, repo):
@@ -55,7 +62,11 @@ def create_issue(owner, repo):
         "title":"{} repository has been created".format(repo), 
         "body": "Hi {}".format(mention)
     }
-    response = requests.post(url, data=json.dumps(data), headers=headers)
+    try:
+        response = requests.post(url, data=json.dumps(data), headers=headers)
+    except:
+        print(sys.exc_info()[0])
+        raise
     return True if response.status_code == 201 else False
 
 def repo_created(body):
