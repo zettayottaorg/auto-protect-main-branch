@@ -1,0 +1,11 @@
+{
+    "required_status_checks": null,
+    "enforce_admins": null,
+    "required_pull_request_reviews" : {
+        "dismissal_restrictions": {},            
+        "require_code_owner_reviews": true,
+        "dismiss_stale_reviews": false,
+        "required_approving_review_count": 1
+    },
+    "restrictions": null
+}

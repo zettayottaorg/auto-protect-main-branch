@@ -16,7 +16,7 @@ import base64
 
 def get_configs():
     configs = configparser.ConfigParser()    
-    configs.read('config.ini')
+    configs.read('configs/config.ini')
     configs.sections()
     return configs['DEFAULT']
 
@@ -25,7 +25,7 @@ configs                 = get_configs()
 api_url                 = configs['api_url']
 token                   = os.environ.get('GH_TOKEN')
 user                    = os.environ.get('USER')
-secret                  = os.environ.get('API_SECRET')
+secret                  = os.environ.get('WH_SECRET')
 mention                 = "@" + user
 headers                 = {
     'Authorization': 'token ' + token, 
@@ -42,20 +42,18 @@ def verifye_signature(payload, rawSignature, secret):
 
 # protect main branch
 def protect_branch(owner, repo, branch):
-    url                 = "{}/repos/{}/{}/branches/{}/protection".format(api_url, owner, repo, branch)           
-    data                = {
-        "required_status_checks": None,
-        "enforce_admins": None,
-        "required_pull_request_reviews" : {
-            "dismissal_restrictions": {},            
-            "require_code_owner_reviews": True,
-            "dismiss_stale_reviews": False,
-            "required_approving_review_count": 1
-        },
-        "restrictions": None
-    }
-    response            = requests.put(url, data=json.dumps(data), headers=headers)
-    return True if response.status_code == 200 else False
+    url                 = "{}/repos/{}/{}/branches/{}/protection".format(api_url, owner, repo, branch)  
+    file_path = 'configs/branch_config.json'
+    if os.path.exists(file_path):
+        with open(file_path) as json_file:
+            try:
+                data = json.load(json_file)    
+                response            = requests.put(url, data=json.dumps(data), headers=headers)
+            except:
+                print("error while trying to open file {}".format(file_path))
+                print(sys.exc_info()[0])
+                raise
+            return True if response.status_code == 200 else False
 
 # create an issue and mention user
 def create_issue(owner, repo):
@@ -64,7 +62,11 @@ def create_issue(owner, repo):
         "title":"{} repository has been created".format(repo), 
         "body": "Hi {}".format(mention)
     }
-    response = requests.post(url, data=json.dumps(data), headers=headers)
+    try:
+        response = requests.post(url, data=json.dumps(data), headers=headers)
+    except:
+        print(sys.exc_info()[0])
+        raise
     return True if response.status_code == 201 else False
 
 def repo_created(body):
@@ -96,7 +98,7 @@ def list_to_events():
         status_code = 400
     for k, v in sorted(os.environ.items()):
         print(k+':', v)
-    return {success:success}, status_code
+    return {'success':success}, status_code
 
 if __name__ == "__main__":
     app.run()
