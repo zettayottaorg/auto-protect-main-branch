@@ -38,7 +38,7 @@ You can create a new webhook under GH organization and point it to web service a
 
 #### 4. Configure system environment variables
 
-To maintain security, web service uses 4 environment variables. These variables can be sent when you start a docker container. Here is list of variables:
+For keeping sensitive information such as secrets and Github token we store them as environment variables. These variables can be sent when you start a docker container. Here is list of variables:
 
 > 1. FLASK_APP=listener.py (allways value is listener.py)
 > 2. USER="your-gh-username"
