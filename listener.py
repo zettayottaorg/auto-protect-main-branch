@@ -96,8 +96,6 @@ def list_to_events():
             status_code = 200 if success else 500            
     else:
         status_code = 400
-    for k, v in sorted(os.environ.items()):
-        print(k+':', v)
     return {'success':success}, status_code
 
 if __name__ == "__main__":

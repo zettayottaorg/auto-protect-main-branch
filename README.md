@@ -38,7 +38,7 @@ You can create a new webhook under GH organization and point it to web service a
 
 #### 4. Configure system environment variables
 
-To maintain security, web service uses 4 environment variables. These variables can be sent when you start a docker container. Here is list of variables:
+For keeping sensitive information such as secrets and Github token we store them as environment variables. These variables can be sent when you start a docker container. Here is list of variables:
 
 > 1. FLASK_APP=listener.py (allways value is listener.py)
 > 2. USER="your-gh-username"
@@ -47,7 +47,7 @@ To maintain security, web service uses 4 environment variables. These variables 
 
 #### 5. Docker image
 
-You can pull docker image from GitHub Container Registry (GHCR) which I created before or build one locally. To build a docker image in local computer you can clone this repository navigate to root directory and run following command and replace docker image name in section #6 with new image name
+You can pull docker image from GitHub Container Registry (GHCR) which I created before or build it locally. To build a docker image in local computer ,you can clone this repository, navigate to root directory and run following command and replace docker image name with your preferred name. If you create new image please replace 'ghcr.io/zettayottaorg/task with new image name in section #6.
 
 ```apache
 docker build -t <your-docker-image-name> .
@@ -67,14 +67,13 @@ docker run -d \
             ghcr.io/zettayottaorg/task
 ```
 
-To start docker image with customized configurations,
+If you'd like to customize configurations, you can follow these steps
 
 * Create a new directory called configs and add 2 files
   * config.ini
   * branch_config.json
 * You can map local configs directory to /apps/configs in docker container
-
-To start docker, run
+* To start docker, run
 
 ```apache
 docker run -d \
