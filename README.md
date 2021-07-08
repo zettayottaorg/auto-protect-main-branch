@@ -111,4 +111,4 @@ Sample of branch_config.json
 
 ## 7. CI/CD
 
-Deployment is done via GitHub actions, the action is triggered by merging a pull request to main branch and it builds and push new docker image to GitHub organization packages.
+Deployment is done via GitHub actions, the action is triggered by merging a pull request to main branch and it builds and push new docker image to GitHub organization packages. 
