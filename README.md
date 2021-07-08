@@ -100,7 +100,7 @@ Sample of branch_config.json
     "required_status_checks": null,
     "enforce_admins": null,
     "required_pull_request_reviews" : {
-        "dismissal_restrictions": {},      
+        "dismissal_restrictions": {},  
         "require_code_owner_reviews": true,
         "dismiss_stale_reviews": false,
         "required_approving_review_count": 1
@@ -108,3 +108,7 @@ Sample of branch_config.json
     "restrictions": null
 }
 ```
+
+## 7. CI/CD
+
+Deployment is done via GitHub actions, the action is triggered by merging a pull request to main branch and it builds and push new docker image to GitHub organization packages.
