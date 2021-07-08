@@ -23,7 +23,7 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}   
     - 
       name: Build and push Docker image
-      run: docker build -t docker pull ghcr.io/zettayottaorg/task:latest .
+      id: docker_build
       with:
           context: .
           push: true
