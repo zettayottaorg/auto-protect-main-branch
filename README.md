@@ -45,7 +45,7 @@ The security can be expanded by whitelisting requests coming from GitHub IPs, li
 
 #### 1. Requirements
 
-To run the web service, you need to have followings
+To run the web service, you need to have
 
 * A GitHub organization and a user with role=owner in the organization
 * A public IP/url, this allows webhook to reach out to web service
