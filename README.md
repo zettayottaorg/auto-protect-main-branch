@@ -1,5 +1,29 @@
 # Web service - Protect main branch automatically upon repository creation
 
+## Question
+
+
+**PART 2**
+
+For this section of the screener, we would like to gain insight into your ability to learn technical topics. Customers will frequently ask for assistance on projects. These requests will require you to learn new topics. This exercise will hopefully give us insight into your approach and aptitude in meeting these customers' needs.
+
+##### ****GitHub** API Challenge**
+
+**GitHub** has [a powerful API](https://developer.github.com/v3/) that enables developers to easily access **GitHub** data. Companies often ask us to craft solutions to their specific problems. A common request we receive is for branches to be automatically protected upon creation.
+
+Please create a simple web service that listens for [organization events](https://developer.github.com/webhooks/#events) to know when a repository has been created. When the repository is created please automate the protection of the main branch. Notify yourself with an [@mention](https://help.github.com/articles/basic-writing-and-formatting-syntax/#mentioning-users-and-teams) in an issue within the repository that outlines the protections that were added.
+
+Some things you will need:
+
+* a **GitHub** account
+* an organization (you can create one for free)
+* a repository (in order to get a branch, you need a commit! Make sure to initialize with a README)
+* a web service that listens for [webhook](https://developer.github.com/webhooks/) deliveries
+* A README.md file in your web service's repository that documents how to run and use the service. Documentation is highly valued at **GitHub** and on the Professional Services team.
+* Be prepared to demo this solution during your following interview
+
+## Solution
+
 ### How does this work
 
 This web service listens to GitHub organization's webhook for new repository creation and calls GitHub APIs to protect the main branch and create an issue and mention the user.
@@ -9,7 +33,7 @@ As soon as GH webhook sends event to web service telling that a new repository i
 1. Repository protection branch API to protect main branch
 2. Issue API by creating a new issue and mention the user in the issue comment
 
-If these calls are successful it returns http code 200 otherwise resonds with 4xx or 5xx code.
+If these calls are successful it returns http code 200 otherwise responds with 4xx or 5xx code.
 
 #### Web service security
 
@@ -111,4 +135,4 @@ Sample of branch_config.json
 
 ## 7. CI/CD
 
-Deployment is done via GitHub actions, the action is triggered by merging a pull request to main branch and it builds and push new docker image to GitHub organization packages. 
+Deployment is done via GitHub actions, the action is triggered by merging a pull request to main branch and it builds and push new docker image to GitHub organization packages.
