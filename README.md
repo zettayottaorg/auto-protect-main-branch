@@ -71,7 +71,7 @@ For keeping sensitive information such as secrets and Github token we store them
 
 #### 5. Docker image
 
-You can pull docker image from GitHub Container Registry (GHCR) which I created before or build it locally. To build a docker image in local computer ,you can clone this repository, navigate to root directory and run following command and replace docker image name with your preferred name. If you create new image please replace 'ghcr.io/zettayottaorg/task with new image name in section #6.
+You can pull docker image from GitHub Container Registry (ghcr.io) which I created before or build it locally. To build a docker image in local computer ,you can clone this repository, navigate to root directory and run following command and replace docker image name with your preferred name. If you create new image please replace 'ghcr.io/zettayottaorg/task with new image name in section #6.
 
 ```apache
 docker build -t <your-docker-image-name> .
